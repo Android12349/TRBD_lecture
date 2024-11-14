@@ -38,7 +38,7 @@ def login():
             login_user(user)
             return redirect(url_for('home'))
         else:
-            return "Неверные данные для входа"
+            return render_template('login.html', error="Неверные данные для входа")
     
     return render_template('login.html')
 
@@ -59,8 +59,8 @@ def home():
 @app.route('/table')
 @login_required
 def table():
-    columns = df.columns.tolist()  # Получаем список названий столбцов
-    data = df.to_dict(orient='records')  # Преобразуем DataFrame в список словарей
+    columns = df.columns.tolist()
+    data = df.to_dict(orient='records')  
     return render_template('table.html', columns=columns, data=data)
 
 # Данные для линейного графика: распределение возраста
