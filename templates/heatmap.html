@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block content %}
+<h2 style="width: 100%; text-align: center;">Интерактивная тепловая карта выживаемости по классу и полу</h2>
+
+<div id="heatmap" style="width: 70%; height: 500px; margin: auto;"></div>
+
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<script>
+    fetch('/data/heatmap')
+        .then(response => response.json())
+        .then(data => {
+            const trace = {
+                z: data.z,
+                x: data.x,
+                y: data.y,
+                type: 'heatmap',
+                colorscale: 'Viridis'
+            };
+
+            const layout = {
+                title: 'Выживаемость по полу и классу',
+                xaxis: {
+                    title: 'Пол'
+                },
+                yaxis: {
+                    title: 'Класс'
+                },
+                margin: {
+                    l: 50, r: 50, t: 50, b: 50
+                }
+            };
+
+            Plotly.newPlot('heatmap', [trace], layout);
+        });
+</script>
+{% endblock %}

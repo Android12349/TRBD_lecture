@@ -1,0 +1,6 @@
+flask
+flask_login
+pandas
+wordcloud
+io
+base64

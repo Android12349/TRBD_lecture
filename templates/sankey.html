@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+<h2 style="width: 100%; text-align: center;">Диаграмма Санки: Путь от пола и класса к выживаемости</h2>
+<div id="sankey"></div>
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<script>
+    fetch('/data/sankey')
+        .then(response => response.json())
+        .then(data => {
+            Plotly.newPlot('sankey', [{
+                type: "sankey",
+                orientation: "h",
+                node: { label: data.labels },
+                link: {
+                    source: data.source,
+                    target: data.target,
+                    value: data.values
+                }
+            }], { title: "Диаграмма Санки" });
+        });
+</script>
+{% endblock %}

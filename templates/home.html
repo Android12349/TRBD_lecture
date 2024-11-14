@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container text-center mt-5">
+    <h1>Добро пожаловать в систему анализа данных Titanic</h1>
+    <p>Выберите один из разделов для просмотра данных и визуализаций.</p>
+    <div class="row mt-4">
+        <div class="col-md-4">
+            <a href="{{ url_for('table') }}" class="btn btn-primary btn-lg" style="width: 15rem;">Таблица данных</a>
+        </div>
+        <div class="col-md-4">
+            <a href="{{ url_for('line_chart') }}" class="btn btn-primary btn-lg" style="width: 15rem;">Линейный график</a>
+        </div>
+        <div class="col-md-4">
+            <a href="{{ url_for('pie_chart') }}" class="btn btn-primary btn-lg" style="width: 15rem;">Круговая диаграмма</a>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col-md-4">
+            <a href="{{ url_for('heatmap') }}" class="btn btn-primary btn-lg" style="width: 15rem;">Тепловая карта</a>
+        </div>
+        <div class="col-md-4">
+            <a href="{{ url_for('map') }}" class="btn btn-primary btn-lg" style="width: 15rem;">Интерактивная карта</a>
+        </div>
+        <div class="col-md-4">
+            <a href="{{ url_for('wordcloud') }}" class="btn btn-primary btn-lg" style="width: 15rem;">Облако слов</a>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col-md-4 offset-md-4">
+            <a href="{{ url_for('sankey') }}" class="btn btn-primary btn-lg" style="width: 15rem;">Диаграмма Санки</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

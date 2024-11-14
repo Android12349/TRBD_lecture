@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block content %}
+<h2 style="width: 100%; text-align: center;">Интерактивная карта</h2>
+
+<div id="map" style="width: 100%; height: 600px;"></div>
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+
+<script>
+    var map = L.map('map').setView([51.0, -3.0], 5);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 10,
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    fetch('/data/map')
+        .then(response => response.json())
+        .then(data => {
+            data.forEach(port => {
+                // Создаем круглый маркер для каждого порта
+                L.circle(port.coords, {
+                    color: 'blue',
+                    fillColor: '#0000FF',
+                    fillOpacity: 0.5,
+                    radius: port.count * 100  // Радиус круга пропорционален количеству пассажиров
+                }).addTo(map).bindPopup(
+                    `<b>${port.name}</b><br>Пассажиров: ${port.count}`
+                );
+            });
+        });
+</script>
+{% endblock %}

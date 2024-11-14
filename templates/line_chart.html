@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+<h2 style="width: 100%; text-align: center;">Линейный график распределения возраста пассажиров</h2>
+<canvas id="lineChart"></canvas>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    fetch('/data/line_chart')
+        .then(response => response.json())
+        .then(data => {
+            const ctx = document.getElementById('lineChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: data.labels,
+                    datasets: [{
+                        label: 'Распределение возраста',
+                        data: data.values,
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        fill: false
+                    }]
+                },
+                options: {
+                    scales: {
+                        x: { title: { display: true, text: 'Возраст' } },
+                        y: { title: { display: true, text: 'Количество пассажиров' } }
+                    }
+                }
+            });
+        });
+</script>
+{% endblock %}

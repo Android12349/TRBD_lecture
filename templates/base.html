@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Visualization</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="../static/images/favicon.png">
+</head>
+<body>    
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand ms-2" href="/">Data Visualization</a>
+        <ul class="navbar-nav">
+            <li class="nav-item"><a class="nav-link" href="/table">Таблица</a></li>
+            <li class="nav-item"><a class="nav-link" href="/line_chart">Линейный график</a></li>
+            <li class="nav-item"><a class="nav-link" href="/pie_chart">Круговая диаграмма</a></li>
+            <li class="nav-item"><a class="nav-link" href="/heatmap">Тепловая карта</a></li>
+            <li class="nav-item"><a class="nav-link" href="/map">Интерактивная карта</a></li>
+            <li class="nav-item"><a class="nav-link" href="/wordcloud">Облако слов</a></li>
+            <li class="nav-item"><a class="nav-link" href="/sankey">Диаграмма Санки</a></li>
+            
+        </ul>
+        <ul class="navbar-nav ms-auto me-2">
+            {% if current_user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('logout') }}">Выйти</a>
+                </li>
+            {% endif %}
+        </ul>
+    </nav>
+    <div class="container">
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>

@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+<h2 style="width: 100%; text-align: center;">Облако слов</h2>
+<div id="wordcloud-container">
+    <img id="wordcloud-image" alt="Облако слов" />
+</div>
+
+<script>
+    fetch('/wordcloud_image')
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('wordcloud-image').src = 'data:image/png;base64,' + data.img_data;
+        });
+</script>
+{% endblock %}
